@@ -1,0 +1,52 @@
+[
+    {
+        "_id": "dd7dbc5c-ca59-4977-ae52-a24ccaf107ba",
+        "country": "United States",
+        "entryDate": "2021-07-01",
+        "fund": [
+            {
+                "path": "/current-portfolio/funds/eqt-infrastructure-v/",
+                "title": "EQT Infrastructure V"
+            }
+        ],
+        "path": "/current-portfolio/first-student-and-first-transit/",
+        "promotedSdg": null,
+        "sdg": [],
+        "sector": "Transport and logistics",
+        "title": "First Student and First Transit",
+        "topic": null
+    },
+    {
+        "_id": "2ad70473-2924-4d48-9e09-938ee2926b69",
+        "country": "United States",
+        "entryDate": "2020-08-14",
+        "fund": [
+            {
+                "path": "/current-portfolio/funds/eqt-ix/",
+                "title": "EQT IX"
+            },
+            {
+                "path": "/current-portfolio/funds/eqt-viii/",
+                "title": "EQT VIII"
+            }
+        ],
+        "path": "/current-portfolio/workwave/",
+        "promotedSdg": null,
+        "sdg": [],
+        "sector": "Technology",
+        "title": "WorkWave",
+        "topic": null
+    },
+    {
+        "_id": "452c79ee-b547-4f3b-af61-57e494736fb0",
+        "country": "United Kingdom",
+        "entryDate": "2021-06-01",
+        "fund": [],
+        "path": "/current-portfolio/manypets/",
+        "promotedSdg": null,
+        "sdg": [],
+        "sector": "Insurance",
+        "title": "ManyPets",
+        "topic": null
+    }
+]

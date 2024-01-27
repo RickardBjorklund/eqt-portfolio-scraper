@@ -1,0 +1,223 @@
+{
+    "_id": "dd7dbc5c-ca59-4977-ae52-a24ccaf107ba",
+    "additionalCompanyInformation": [],
+    "basePage": null,
+    "heroImage": {
+        "asset": {
+            "url": "https://cdn.sanity.io/images/30p7so6x/eqt-web-prod/ae73849735b9f19caa07112681ca1b2958d62de1-1534x1024.jpg",
+            "title": null,
+            "label": null,
+            "metadata": {
+                "dimensions": {
+                    "aspectRatio": 1.498046875,
+                    "width": 1534,
+                    "height": 1024
+                },
+                "lqip": "data:image/jpeg;base64,/9j/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAANABQDASIAAhEBAxEB/8QAGAAAAgMAAAAAAAAAAAAAAAAAAAcDBQb/xAAkEAACAgIBAwQDAAAAAAAAAAABAwIEAAURBhIhFCIyYYGh0f/EABUBAQEAAAAAAAAAAAAAAAAAAAUG/8QAIREAAQQBAwUAAAAAAAAAAAAAAQACAxEEBRKhExQxMvD/2gAMAwEAAhEDEQA/ALTR3V1Gqqa6wx+vWROMGjj8Ztdb1BYhFtNwhFLhzHk+efrF10Rtb+3rxc98FwB+C1gfvIN/v2nrLWVQoBUZcy93mWTeJqc0k/byG68/UEnPhtYzqNTht7p1cqWu32gLjzHtB4OGKKn6rbvv2DccgRtTXGEPIAHH9wx0McRe/go01fpyF//Z"
+            }
+        },
+        "altText": null,
+        "attribution": null,
+        "caption": null,
+        "crop": null,
+        "hotspot": null
+    },
+    "_rawBody": [
+        {
+            "_key": "a1d17fb6fcb5",
+            "_type": "block",
+            "children": [
+                {
+                    "_key": "7412a4240792",
+                    "_type": "span",
+                    "marks": [
+                        "strong"
+                    ],
+                    "text": "About\n"
+                },
+                {
+                    "_key": "d23ca3be3aa5",
+                    "_type": "span",
+                    "marks": [],
+                    "text": "Headquartered in Cincinnati, Ohio, First Student and First Transit are dedicated to providing safe, reliable and cost-effective transportation services to school districts, cities, enterprises and their constituents. First Student is the clear market leader in student transportation and focuses on providing contracted services for home-to-school transportation, including for special education, homeless and other student populations. First Transit operates a comprehensive portfolio of complementary public transportation services on behalf of cities, municipalities, and businesses, including fixed route buses and trains, paratransit services, shuttle buses, outsourced vehicle maintenance and other services."
+                }
+            ],
+            "markDefs": [],
+            "style": "normal"
+        },
+        {
+            "_key": "dd6c54247685",
+            "_type": "block",
+            "children": [
+                {
+                    "_key": "741712a64e41",
+                    "_type": "span",
+                    "marks": [
+                        "strong"
+                    ],
+                    "text": "Market trends and drivers\n"
+                },
+                {
+                    "_key": "f74ca0de3a27",
+                    "_type": "span",
+                    "marks": [],
+                    "text": "Student and public transportation are critical components of the US and Canadian educational and economic ecosystems, with student success metrics and funding directly correlated to student attendance, and millions of individuals across the socioeconomic spectrum relying on public transportation daily to get to work, access healthcare, and contribute to the broader economy. As a result of the essential nature of services provided, the public transportation end market is highly stable through economic cycle and benefits from favourable tailwinds including increasing demand for outsourcing and for safer, smarter and more environmentally friendly transportation options. The growing capital intensity and operational complexity associated with digitizing operations and electrifying the fleet will place greater demand across the value chain and favor large, resource-rich outsourced providers, such as First Student and First Transit, who bring best-in-class safety, reliability, capital, and technological expertise to districts and governments."
+                }
+            ],
+            "markDefs": [],
+            "style": "normal"
+        },
+        {
+            "_key": "cf486756ccb1",
+            "_type": "block",
+            "children": [
+                {
+                    "_key": "1c8ed8111221",
+                    "_type": "span",
+                    "marks": [
+                        "strong"
+                    ],
+                    "text": "Investment potential\n"
+                },
+                {
+                    "_key": "e82176abb610",
+                    "_type": "span",
+                    "marks": [],
+                    "text": "EQT Infrastructure is committed to building upon the success First Student and First Transit have achieved by making investments in organizational, operational, digital, and sustainability initiatives to further improve and differentiate the Company’s service offering. Most notably, EQT Infrastructure intends to help future-proof the Company by investing in the electrification of its fleet and accelerating its transition to renewable fuel sources in order to support passenger health and reduce environmental impact."
+                }
+            ],
+            "markDefs": [],
+            "style": "normal"
+        }
+    ],
+    "relatedContent": null,
+    "relevantInvestments": null,
+    "metaDescription": null,
+    "metaImage": null,
+    "metaTitle": null,
+    "indexing": "index,follow",
+    "preamble": "First Student (“FS”) is the largest student transportation service provider in North America, providing over 900 million student journeys a year; First Transit (“FT”) is one of the leading transit management operators in North America, transporting over 300 million passengers annually. ",
+    "promotedSdg": null,
+    "slug": {
+        "current": "first-student-and-first-transit"
+    },
+    "tags": [
+        {
+            "title": "First Student"
+        },
+        {
+            "title": "First Transit"
+        }
+    ],
+    "sdg": [],
+    "title": "First Student and First Transit",
+    "heading": "Leading providers of transportation solutions to communities in North America",
+    "country": "United States",
+    "entryDate": "2021-07-01",
+    "exitDate": null,
+    "responsibleAdvisors": [
+        {
+            "id": "-cda8cb3e-3b4a-5d0b-8b35-eff6c460760b",
+            "title": "Crosby Cook",
+            "portrait": {
+                "asset": {
+                    "url": "https://cdn.sanity.io/images/30p7so6x/eqt-web-prod/5100a4063b7237426cea8b10ce5e02acd86c05c8-1488x1752.png",
+                    "title": null,
+                    "label": null,
+                    "metadata": {
+                        "dimensions": {
+                            "aspectRatio": 0.8493150684931506,
+                            "width": 1488,
+                            "height": 1752
+                        },
+                        "lqip": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAXCAYAAAALHW+jAAAACXBIWXMAAA7DAAAOwwHHb6hkAAAG20lEQVQ4jVWUeVATdhbHv4Ak3IGcmJAIhHDlghDlJipHrUUr1nJoFQ9Q2R4L6KgoFhWxdhUENhCBkBXBI1Y8iKiBFq3a1lZtWauoFMGqq25Xd7fdsau7w/vtVLezs++vN2/m+5n5zHvzAABCWRAmBASAKxTCRyyBG88fpvQ0ZOS/CkVwsItOE+02NTHeLeeVTBeeRIAFBQsRGCQFfCdCpNLCTxqE/ysuXwD3gAB4i8Xo+qAGcqUSvIkTPQOkE0OlkxRTwyNUcw16Tc4UQ0yyXqeVhYar3GelTkFmcjz85SEoSE+EXqd9CfP1D4A3xx1+Egng7YNAufyXnu8jFs/wk0h2CGVSpzxk0teRkeGXNeqoHmW4aq1ILtdwBKIJ4HpBIJMhPyMVBv1/gRWfXoOvWAKuQPBC2Vsk9vMQCOdw+fwjHgLBI55Y9C+pIogiwpWkjlI9VyqDr8sUQesmKuSKlORkFw8fD4SFqyANVf5P2Usoglgmh79E4sYVCIwcPr/DS8D/a6AskMWqw9jMNCMtyJ5Kb2VPYznpic/TE2M/i4/VLorVawPg6geDNhJxMfqXMEGgFB5CEeDPh7dY4sMVCJcEBIqvaSNDaeGMJKp9N48O/66c+tpqqN+6jQ7XrqXNJfk/zklP3herVRsTEhJcAVfotRoIeL6ASCYHVyQCuN7gisQCX4lkfXSk8kHxrDTWtX7x+BXb+3TX2Uo/XDzKHl8+QffOdNGRXetoSU7mFYNOnRup1niAw4NGo8ZYrw0QSuXwFItdgAlw4wsFApl0Q6pR83BTYTY7/UHJ+ND+rfRwwEZPvjpGTy6foD9fsNOAdTN7b372d0a9eqVYEeILeCAqOgqjjlYgSh8DT5H4pT+P7y+RB5VPm6K/uzb/FdZaNp9O1ZbTraON7P7AXnbD0UaD9l3U37yBVRbNvZeVYlyTYIzl/xKVyoMw2FUHLDPFgyMQvuAFy4OEEWGhFa8mG+6Xzctkmwpnkbl0AQ2YK9jQ4V10vr2G+prep4HdG5m1cvmTquW59fWri0N+Xe7w8VagOCUOiiDZi8EMbaRiuj56x1tZyY93lrzJ9m0sJnvVCurbWU7X7bU0dMzCrh1voxs9u9l529anpxo3dJ1v3675FTjm7ARK0oyYa9RB7umFRQkxgXkJMVVvZ5seWFcXsgvmtXS2rpw+2VnObh5uoB/O2enxxWP08NxBNuLY/bcb3WbLcI9VtX9ZFj7/cDnGPrYDv01PQEl6EmZHhuPd9CTPFRlJ2avmpJ82v533jxPVK6m7cil1V62kwa4d9Ke+PfRwoJMeDOx5drfPdvF7Z8ey7/sPBvz9i5N41N+BW0478F6SHqtezwRjQGNRHlblZAWuz5uxsrY454q1LP/fLe/ksv0VxXTJ9iGNHLXQaE8Tu3PacveOs23raF+H6s45p2tbBnD3bDfO7jED76QYsFDqj9I508H6S7HhN0tdKgpmxtUsnn2osWTez7bSBax3axld7WqgUUc7G+1tGR891fzlSG9TzuChOu63h3bixtFd6LS04FRzA+A5KQpaVQQ2Lc5B2exUbM9LQ9kbWao1uVkt1YWzfrKVL2Sf1K2joUNNNObsZKNO2/Pvei2Om8cbE/ssNS4b583F9SMNYIzhes9ewD1YCyjUSE/PQEGqHmYlsCrvtYhVb2S2rZmX8dP24rmse1spXeyso6vHW9mQo+Wft05YPhp2NMeCl4jKTRXoad4MeEwCX50M+EfHg6uMwZwFS2B9zJDyeoFXWVFh9pai3I+rF2U/ry7MZtZ1y6h/92a6ZK9nQz2W58OnrCcHHTZTQ2Ozm/1QL/KWroBAZ8KkyZmAe7gRhrSpLw/JU+gZEj8tpWhFibWpavWjfRuXU8fq+dS9ZSVd3LONbjosdNvZPv5HR/vwvpaGytkLS8IAH7eXX0YPb00qwI1MgJdS7+YbaRRBFjGDHz3Z+uaSkntdLebxC3tr2bmmtfSZpYJd+6iO7jhtNOpsZxcO/P7Zti2bv57yWkGlR0SCMTBuOk8el+HqrU0DPMONIm6YYQpHGVvqqlCf8AqLeZSVt3S8s+sAu3rGQUM9LeyafQfdOmZmd/psdPN4E/Vbd7DqTdXPDDPzh72jk/b6alKK/HWmuAC9KRCccOMaTpjhAEcZe2tCsO4pJ0RHk2fmkrmtkwa/+pKNfuGkkdN/oNsn22jsdDsbtDdQ/x4z1dc3scScxeM+6pQffdQp3/J0pv08bVoV3FVx992VhqccpYHcQ2PYhGAdRZiyqaa+hV269A2NXP2Gbl/oZWP9nWzkZDtdOdzKznQfpN1tHTQtbznxdCbmo0kjP63pZ19t2l/+A3TqzS5Eh56tAAAAAElFTkSuQmCC"
+                    }
+                },
+                "altText": null,
+                "attribution": "unknown",
+                "caption": "Photo of Crosby Cook",
+                "crop": null,
+                "hotspot": null
+            }
+        }
+    ],
+    "website": "https://firststudentinc.com/",
+    "parentPage": {
+        "page": {
+            "_id": "currentPortfolio",
+            "path": "/current-portfolio/",
+            "title": "Current portfolio"
+        }
+    },
+    "path": "/current-portfolio/first-student-and-first-transit/",
+    "sector": "Transport and logistics",
+    "board": [
+        {
+            "title": "Chairperson",
+            "name": "Jake Brace",
+            "person": null
+        },
+        {
+            "title": "Board member",
+            "name": "Carol Browner",
+            "person": null
+        },
+        {
+            "title": "Board member",
+            "name": "Amy Rosen",
+            "person": null
+        },
+        {
+            "title": "Board member",
+            "name": "Nick Costides",
+            "person": null
+        },
+        {
+            "title": "Board member",
+            "name": "Crosby Cook",
+            "person": null
+        }
+    ],
+    "management": [
+        {
+            "title": "CEO First Student",
+            "name": "John Kenning",
+            "person": null
+        },
+        {
+            "title": "CFO First Student",
+            "name": "Joseph Schwaderer",
+            "person": null
+        },
+        {
+            "title": "CEO First Transit",
+            "name": "Brad Thomas",
+            "person": null
+        },
+        {
+            "title": "CFO First Transit",
+            "name": "Mark Williams",
+            "person": null
+        }
+    ],
+    "fund": [
+        {
+            "title": "EQT Infrastructure V"
+        }
+    ],
+    "logo": {
+        "asset": {
+            "url": "https://cdn.sanity.io/images/30p7so6x/eqt-web-prod/bc7c2fe1ae87df14c0d007f5833e77829df0ed23-130x44.png"
+        }
+    },
+    "businessLine": {
+        "parentPage": {
+            "page": {
+                "_id": "435f7df9-4df0-48bd-92e3-89e0f15a764c",
+                "path": "/real-assets/",
+                "title": "Real Assets"
+            }
+        }
+    },
+    "video": null
+}
