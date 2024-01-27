@@ -26,3 +26,13 @@ def read_json_file(file):
 @time_function
 def json_file_to_data_frame(file):
     return pandas.read_json(file, lines=True)
+
+
+@time_function
+def write_json_file(file, data):
+    # Serializing json
+    json_object = json.dumps(data, indent=4)
+
+    # Writing to file
+    with open(file, "w", encoding="utf8") as json_file:
+        json_file.write(json_object)
