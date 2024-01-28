@@ -15,4 +15,4 @@ To run the code in its most basic form: `python src/main.py`.
 To see all options available when running code: `python src/main.py --help`.
 
 ## Resulting data
-The code will produce a JSON file named `result.json` and place it in the `/results` folder.
+The code will produce a JSON file named `result_{current_time}.json` and place it in the `/results` folder.

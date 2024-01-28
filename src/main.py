@@ -6,7 +6,7 @@ import pandas
 
 from gcs_client import fetch_enrichment_data
 from page_data.page_data_sync import get_registered_domain
-from utils import time_function, json_file_to_data_frame
+from utils import time_function, json_file_to_data_frame, save_df_to_file
 
 
 @time_function
@@ -135,8 +135,7 @@ def main():
         funding_rounds = get_funding_rounds(enriched_company_data)
         enriched_company_data = enriched_company_data.assign(funding_rounds=funding_rounds)
 
-    with open("../results/result.json", "w", encoding="utf-8") as file:
-        enriched_company_data.to_json(path_or_buf=file, orient="records", indent=4, force_ascii=False)
+    save_df_to_file(enriched_company_data)
 
 
 if __name__ == "__main__":

@@ -36,3 +36,15 @@ def write_json_file(file, data):
     # Writing to file
     with open(file, "w", encoding="utf8") as json_file:
         json_file.write(json_object)
+
+
+@time_function
+def save_df_to_file(df):
+    import datetime
+
+    current_time = datetime.datetime.now()
+    timestamp = current_time.strftime("%Y-%m-%d_%H-%M-%S")
+    filepath = f"../results/result_{timestamp}.json"
+
+    with open(filepath, "w", encoding="utf-8") as file:
+        df.to_json(path_or_buf=file, orient="records", indent=4, force_ascii=False)
