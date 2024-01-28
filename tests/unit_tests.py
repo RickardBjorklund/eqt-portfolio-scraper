@@ -1,8 +1,8 @@
 import unittest
 from unittest import mock
 
-from main import get_company_data, extract_details, get_description
-from utils import read_json_file
+from src.main import get_company_data, extract_details, get_description
+from src.utils import read_json_file
 
 
 def mocked_fetch_company_details_no_details(*args, **kwargs):
@@ -51,7 +51,7 @@ class MyTestCase(unittest.TestCase):
         details = extract_details(cd)
         self.assertEqual(details, expected_results)
 
-    @mock.patch('main.fetch_company_details', side_effect=mocked_fetch_company_details_no_details)
+    @mock.patch('src.main.fetch_company_details', side_effect=mocked_fetch_company_details_no_details)
     def test_get_companies_no_details(self, _):
         expected_results = [
             {
@@ -83,8 +83,8 @@ class MyTestCase(unittest.TestCase):
         data = get_company_data(cps)
         self.assertEqual(data, expected_results)
 
-    @mock.patch('main.fetch_company_details', side_effect=mocked_fetch_company_details)
-    @mock.patch('main.extract_details', side_effect=mocked_extract_details)
+    @mock.patch('src.main.fetch_company_details', side_effect=mocked_fetch_company_details)
+    @mock.patch('src.main.extract_details', side_effect=mocked_extract_details)
     def test_get_companies_mocked_details(self, _mocked_extract_details, _mocked_fetch_company_details):
         expected_results = [
             {

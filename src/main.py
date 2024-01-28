@@ -120,7 +120,7 @@ def get_funding_rounds(companies_data):
     # funding_rounds = json_file_to_data_frame("real_data/funding_rounds.json")
 
     result = []
-    for index, company in companies_data.iterrows():
+    for company in companies_data.itertuples():
         company_uuid = company.uuid
         if not isinstance(company_uuid, str):
             result.append([])
