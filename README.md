@@ -11,8 +11,8 @@ Create a virtual environment `python -m venv venv`, activate it `.\venv\Scripts\
 In order to run the code with the `--use-html-scraper` argument, you need to let Playwright install the required browsers `playwright install`.
 
 # Basic usage
-To run the code in its most basic form: `python main.py`.
-To see all options available when running code: `python main.py --help`.
+To run the code in its most basic form: `python src/main.py`.
+To see all options available when running code: `python src/main.py --help`.
 
 ## Resulting data
 The code will produce a JSON file named `result.json` and place it in the `/results` folder.

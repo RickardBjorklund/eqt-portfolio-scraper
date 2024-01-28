@@ -1,16 +1,17 @@
 import argparse
+import asyncio
 import time
 
 import pandas
 
 from gcs_client import fetch_enrichment_data
-from page_data.shared import get_registered_domain
+from page_data.page_data_sync import get_registered_domain
 from utils import time_function, json_file_to_data_frame
 
 
 @time_function
 def get_company_data_from_html(args):
-    if args.single_process:
+    if args.synchronous:
         from html_playwright.playwright_sp import scrape_website
     else:
         from html_playwright.playwright_mp import scrape_website
@@ -30,19 +31,32 @@ def get_company_data_from_html(args):
 
 
 @time_function
-def get_company_data_from_page_data(args):
-    if args.single_process:
-        from page_data.page_data_sp import fetch_companies, get_company_data
-    else:
-        from page_data.page_data_mp import fetch_companies, get_company_data
+def get_company_data_from_page_data(portfolio_type):
+    from page_data.page_data_sync import fetch_companies, get_company_data
 
     companies = []
-    if "current" in args.type:
+    if "current" in portfolio_type:
         companies += fetch_companies("https://eqtgroup.com/page-data/current-portfolio/page-data.json")
-    if "divested" in args.type:
+    if "divested" in portfolio_type:
         companies += fetch_companies("https://eqtgroup.com/page-data/current-portfolio/divestments/page-data.json")
 
     company_data = get_company_data(companies)
+
+    return company_data
+
+
+@time_function
+def get_company_data_from_page_data_async(portfolio_type):
+    from page_data.page_data_async import fetch_companies, get_company_data
+
+    companies = []
+    if "current" in portfolio_type:
+        companies += asyncio.run(fetch_companies("https://eqtgroup.com/page-data/current-portfolio/page-data.json"))
+    if "divested" in portfolio_type:
+        companies += asyncio.run(
+            fetch_companies("https://eqtgroup.com/page-data/current-portfolio/divestments/page-data.json"))
+
+    company_data = asyncio.run(get_company_data(companies))
 
     return company_data
 
@@ -84,15 +98,19 @@ def main():
     parser.add_argument("--use-html-scraper", action="store_true",
                         help="Use Playwright to scrape data from HTML instead of requesting JSON page data "
                              "(slower, slightly lower fidelity, made for demonstrative purposes)")
-    parser.add_argument("--single-process", action="store_true",
-                        help="Longer execution time, less stress on CPU and easier to debug")
+    parser.add_argument("--synchronous", action="store_true",
+                        help="Same results, longer execution time, but easier to debug")
 
     args = parser.parse_args()
 
     if args.use_html_scraper:
         company_data = get_company_data_from_html(args)
     else:
-        company_data = get_company_data_from_page_data(args)
+        if args.synchronous:
+            company_data = get_company_data_from_page_data(args.type)
+        else:
+            company_data = get_company_data_from_page_data_async(args.type)
+
     company_data_df = pandas.DataFrame.from_dict(company_data)
 
     # all_organizations = fetch_enrichment_data("interview-test-org.json.gz")
@@ -117,7 +135,7 @@ def main():
         funding_rounds = get_funding_rounds(enriched_company_data)
         enriched_company_data = enriched_company_data.assign(funding_rounds=funding_rounds)
 
-    with open("../results/result3.json", "w", encoding="utf-8") as file:
+    with open("../results/result.json", "w", encoding="utf-8") as file:
         enriched_company_data.to_json(path_or_buf=file, orient="records", indent=4, force_ascii=False)
 
 
