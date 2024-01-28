@@ -1,6 +1,9 @@
 # EQT Portfolio Scraper
 Scrapes company data from EQT's public website and enriches it with information provided by the Motherbrain Team.
 
+# Prerequisites
+To run this code you will need **Python 3.12**.
+
 # Install - Linux / MacOS
 Create a virtual environment `python3 -m venv venv`, activate it `source venv/bin/activate` and install requirements `python3 -m pip install -r requirements.txt`.
 
@@ -8,7 +11,7 @@ Create a virtual environment `python3 -m venv venv`, activate it `source venv/bi
 Create a virtual environment `python -m venv venv`, activate it `.\venv\Scripts\activate.bat` and install requirements `python -m pip install -r requirements.txt`.
 
 # Install - Playwright
-In order to run the code with the `--use-html-scraper` argument, you need to let Playwright install the required browsers `playwright install`.
+In order to run the code with the `--use-html-scraper` argument, you need to let Playwright install the required browsers first `playwright install`.
 
 # Basic usage
 To run the code in its most basic form: `python src/main.py`.

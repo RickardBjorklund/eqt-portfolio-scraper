@@ -6,7 +6,7 @@ import pandas
 
 from gcs_client import fetch_enrichment_data
 from page_data.page_data_sync import get_registered_domain
-from utils import time_function, json_file_to_data_frame, save_df_to_file
+from utils import time_function, save_df_to_file
 
 
 @time_function
@@ -63,8 +63,7 @@ def get_company_data_from_page_data_async(portfolio_type):
 
 @time_function
 def get_funding_rounds(companies_data):
-    # funding_rounds = fetch_enrichment_data("interview-test-funding.json.gz")
-    funding_rounds = json_file_to_data_frame("../real_data/funding_rounds.json")
+    funding_rounds = fetch_enrichment_data("interview-test-funding.json.gz")
 
     result = []
     for company in companies_data.itertuples():
@@ -113,8 +112,7 @@ def main():
 
     company_data_df = pandas.DataFrame.from_dict(company_data)
 
-    # all_organizations = fetch_enrichment_data("interview-test-org.json.gz")
-    all_organizations = json_file_to_data_frame("../real_data/organizations.json")
+    all_organizations = fetch_enrichment_data("interview-test-org.json.gz")
 
     start = time.perf_counter()
     all_organizations.dropna(subset=['homepage_url'], inplace=True)
