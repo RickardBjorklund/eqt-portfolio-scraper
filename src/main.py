@@ -1,123 +1,55 @@
+import argparse
 import time
+
 import pandas
-import requests
-import tldextract
 
 from gcs_client import fetch_enrichment_data
+from page_data.shared import get_registered_domain
 from utils import time_function, json_file_to_data_frame
 
-BASE_URL = "https://eqtgroup.com/page-data"
 
+@time_function
+def get_company_data_from_html(args):
+    if args.single_process:
+        from html_playwright.playwright_sp import scrape_website
+    else:
+        from html_playwright.playwright_mp import scrape_website
 
-def get_registered_domain(url):
-    if not isinstance(url, str):
-        return None
-    return tldextract.extract(url).registered_domain
+    company_data = []
+    if "current" in args.type:
+        print("current html")
+        company_data += scrape_website("https://eqtgroup.com/current-portfolio/")
+    if "divested" in args.type:
+        print("divested html")
+        company_data += scrape_website("https://eqtgroup.com/current-portfolio/divestments/")
 
+    # TODO: Add registered domain to company data here
 
-def get_logo_url(logo):
-    if logo is None:
-        return None
-    if logo.get("asset") is None:
-        return None
-    return logo.get("asset").get("url")
+    return company_data
 
 
 @time_function
-def fetch_companies(url):
-    try:
-        response = requests.get(url).json()
-        return response["result"]["data"]["allSanityCompanyPage"]["nodes"]
-    except Exception as err:
-        print(f"Unexpected {err=}, {type(err)=}")
-        raise
+def get_company_data_from_page_data(args):
+    if args.single_process:
+        from page_data.page_data_sp import fetch_companies, get_company_data
+    else:
+        from page_data.page_data_mp import fetch_companies, get_company_data
 
+    companies = []
+    if "current" in args.type:
+        companies += fetch_companies("https://eqtgroup.com/page-data/current-portfolio/page-data.json")
+    if "divested" in args.type:
+        companies += fetch_companies("https://eqtgroup.com/page-data/current-portfolio/divestments/page-data.json")
 
-def fetch_company_details(url):
-    try:
-        response = requests.get(url).json()
-        return response["result"]["data"]["sanityCompanyPage"]
-    except:
-        return None
+    company_data = get_company_data(companies)
 
-
-def get_description(raw_body):
-    if not raw_body:
-        return None
-    description = ""
-    for part in raw_body:
-        for sub_part in part.get("children", []):
-            description += sub_part.get("text", "")  # TODO: Maybe add space or newline after each sub_part
-    return description
-
-
-def extract_details(company_details):
-    interesting_details = {
-        "description": get_description(company_details.get("_rawBody", [])),
-        "preamble": company_details.get("preamble"),
-        "heading": company_details.get("heading"),
-        "responsibleAdvisors": [advisor.get("title") for advisor in company_details.get("responsibleAdvisors", [])],
-        "website": company_details.get("website"),
-        "registeredDomain": get_registered_domain(company_details.get("website")),
-        "board": company_details.get("board", []),
-        "management": company_details.get("management", []),
-        "logo": get_logo_url(company_details.get("logo")),
-    }
-
-    # This data exists on the details page, but we already have it from the company listing
-    # redundant_details = {
-    #     "title": company_details.get("title", ""),
-    #     "country": company_details.get("country", ""),
-    #     "entryDate": company_details.get("entryDate", ""),
-    #     "exitDate": company_details.get("exitDate", ""),
-    #     "sector": company_details.get("sector", ""),
-    #     "fund": [fund.get("title", "") for fund in company_details.get("fund", [])],
-    # }
-
-    return interesting_details
-
-
-@time_function
-def get_company_data(companies):
-    companies_data = []
-    for company in companies:
-        company_data = {
-            "title": company.get("title"),
-            "country": company.get("country"),
-            "entryDate": company.get("entryDate"),
-            "exitDate": company.get("exitDate"),
-            "fund": [fund.get("title", "") for fund in company.get("fund", [])],
-            "sector": company.get("sector"),
-        }
-
-        # promotedSdg, sdg and topic exist in the page data,
-        # but are always (with one exception where promotedSdg=3) undefined.
-        # The path to the company details site on EQT webpage doesn't really seem useful in this context.
-        # The id seems useless in this context as it is not correlating to the id in the data from gcs.
-        # unused_company_data = {
-        #     "promotedSdg": company.get("promotedSdg"),
-        #     "sdg": company.get("sdg"),
-        #     "topic": company.get("topic"),
-        #     "path": company.get("path"),
-        #     "_id": company.get("_id"),
-        # }
-
-        company_details = fetch_company_details(f"{BASE_URL}{company.get("path")}page-data.json")
-        if not company_details:
-            companies_data.append(company_data)
-            print(f"No details could be found for: {company.get("title")}")
-            continue
-
-        interesting_details = extract_details(company_details)
-        companies_data.append(company_data | interesting_details)
-
-    return companies_data
+    return company_data
 
 
 @time_function
 def get_funding_rounds(companies_data):
     funding_rounds = fetch_enrichment_data("interview-test-funding.json.gz")
-    # funding_rounds = json_file_to_data_frame("real_data/funding_rounds.json")
+    # funding_rounds = json_file_to_data_frame("../real_data/funding_rounds.json")
 
     result = []
     for company in companies_data.itertuples():
@@ -139,14 +71,31 @@ def get_funding_rounds(companies_data):
 
 @time_function
 def main():
-    current_portfolio_companies = fetch_companies(f"{BASE_URL}/current-portfolio/page-data.json")
-    divestment_companies = fetch_companies(f"{BASE_URL}/current-portfolio/divestments/page-data.json")
+    parser = argparse.ArgumentParser(
+        prog="EQT Portfolio Scraper", description="Scrapes company data from EQT's public website and enriches it with "
+                                                  "information provided by the Motherbrain Team")
 
-    company_data = get_company_data(current_portfolio_companies + divestment_companies)
+    parser.add_argument("-t", "--type", dest="type", choices=["current", "divested"],
+                        default=["current", "divested"],
+                        help="Chose to only get current or divested companies, leave out argument to get both")
+    parser.add_argument("--skip-funding-rounds", action="store_true",
+                        help="Skip step where company data is enriched with information about their funding rounds")
+    parser.add_argument("--use-html-scraper", action="store_true",
+                        help="Use Playwright to scrape data from HTML instead of requesting JSON page data "
+                             "(slower, lower precision, made for demonstrative purposes)")
+    parser.add_argument("--single-process", action="store_true",
+                        help="Longer execution time, less stress on CPU and easier to debug")
+
+    args = parser.parse_args()
+
+    if args.use_html_scraper:
+        company_data = get_company_data_from_html(args)
+    else:
+        company_data = get_company_data_from_page_data(args)
     company_data_df = pandas.DataFrame.from_dict(company_data)
 
     all_organizations = fetch_enrichment_data("interview-test-org.json.gz")
-    # all_organizations = json_file_to_data_frame("real_data/organizations.json")
+    # all_organizations = json_file_to_data_frame("../real_data/organizations.json")
 
     start = time.perf_counter()
     all_organizations.dropna(subset=['homepage_url'], inplace=True)
@@ -163,13 +112,13 @@ def main():
     print(f"Merging DataFrames took {elapsed:.6f} seconds to execute")
     print(f"{len(enriched_company_data.index)} rows after merge")
 
-    funding_rounds = get_funding_rounds(enriched_company_data)
-    enriched_company_data_with_funding_rounds = enriched_company_data.assign(funding_rounds=funding_rounds)
+    if not args.skip_funding_rounds:
+        funding_rounds = get_funding_rounds(enriched_company_data)
+        enriched_company_data = enriched_company_data.assign(funding_rounds=funding_rounds)
 
-    with open("result.json", "w", encoding="utf-8") as file:
-        enriched_company_data_with_funding_rounds.to_json(path_or_buf=file, orient="records", indent=4,
-                                                          force_ascii=False)
+    with open("../results/result.json", "w", encoding="utf-8") as file:
+        enriched_company_data.to_json(path_or_buf=file, orient="records", indent=4, force_ascii=False)
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     main()
