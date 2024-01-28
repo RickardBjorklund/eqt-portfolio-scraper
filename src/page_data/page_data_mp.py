@@ -6,22 +6,21 @@ from page_data.shared import extract_details, fetch_companies, fetch_company_det
 def get_company_data_singular(company):
     company_data = {
         "title": company.get("title"),
-        "country": company.get("country"),
-        "entryDate": company.get("entryDate"),
-        "exitDate": company.get("exitDate"),
-        "fund": [fund.get("title", "") for fund in company.get("fund", [])],
         "sector": company.get("sector"),
+        "country": company.get("country"),
+        "fund": [fund.get("title", "") for fund in company.get("fund", [])],
+        "entry": company.get("entryDate"),
+        "exit": company.get("exitDate"),
+        "company_details_path": company.get("path"),
     }
 
     # promotedSdg, sdg and topic exist in the page data,
     # but are always (with one exception where promotedSdg=3) undefined.
-    # The path to the company details site on EQT webpage doesn't really seem useful in this context.
-    # The id seems useless in this context as it is not correlating to the id in the data from gcs.
+    # The id doesn't really seem useful in this context as it is not correlating to the id in the data from gcs.
     # unused_company_data = {
     #     "promotedSdg": company.get("promotedSdg"),
     #     "sdg": company.get("sdg"),
     #     "topic": company.get("topic"),
-    #     "path": company.get("path"),
     #     "_id": company.get("_id"),
     # }
 

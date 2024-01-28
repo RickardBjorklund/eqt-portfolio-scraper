@@ -48,9 +48,9 @@ def extract_details(company_details):
         "description": get_description(company_details.get("_rawBody", [])),
         "preamble": company_details.get("preamble"),
         "heading": company_details.get("heading"),
-        "responsibleAdvisors": [advisor.get("title") for advisor in company_details.get("responsibleAdvisors", [])],
+        "responsible_advisors": [advisor.get("title") for advisor in company_details.get("responsibleAdvisors", [])],
         "website": company_details.get("website"),
-        "registeredDomain": get_registered_domain(company_details.get("website")),
+        "registered_domain": get_registered_domain(company_details.get("website")),
         "board": company_details.get("board", []),
         "management": company_details.get("management", []),
         "logo": get_logo_url(company_details.get("logo")),
@@ -60,8 +60,8 @@ def extract_details(company_details):
     # redundant_details = {
     #     "title": company_details.get("title", ""),
     #     "country": company_details.get("country", ""),
-    #     "entryDate": company_details.get("entryDate", ""),
-    #     "exitDate": company_details.get("exitDate", ""),
+    #     "entry": company_details.get("entryDate", ""),
+    #     "exit": company_details.get("exitDate", ""),
     #     "sector": company_details.get("sector", ""),
     #     "fund": [fund.get("title", "") for fund in company_details.get("fund", [])],
     # }

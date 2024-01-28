@@ -70,6 +70,9 @@ def scrape_website(url):
             # Ensure there are at least 4 spans as expected
             parts = row.query_selector_all("span.flex-1")
             if len(parts) > 4:
+                link_element = parts[0].query_selector("a")
+                page_link = link_element.get_attribute("href") if link_element else None
+
                 title = parts[0].text_content()
                 sector = parts[1].text_content()
                 country = parts[2].text_content()
@@ -88,10 +91,9 @@ def scrape_website(url):
                     "fund": fund.strip(),
                     "entry": portfolio_entry.strip(),
                     "exit": portfolio_exit.strip() if portfolio_exit else None,
+                    "company_details_path": page_link,
                 }
 
-                link_element = parts[0].query_selector("a")
-                page_link = link_element.get_attribute("href") if link_element else None
                 if page_link:
                     company_details = scrape_sub_page(browser, page_link)
                     company_data |= company_details

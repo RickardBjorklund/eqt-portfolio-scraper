@@ -23,7 +23,8 @@ def get_company_data_from_html(args):
         print("divested html")
         company_data += scrape_website("https://eqtgroup.com/current-portfolio/divestments/")
 
-    # TODO: Add registered domain to company data here
+    for company in company_data:
+        company["registered_domain"] = get_registered_domain(company.get("web"))
 
     return company_data
 
@@ -48,8 +49,8 @@ def get_company_data_from_page_data(args):
 
 @time_function
 def get_funding_rounds(companies_data):
-    funding_rounds = fetch_enrichment_data("interview-test-funding.json.gz")
-    # funding_rounds = json_file_to_data_frame("../real_data/funding_rounds.json")
+    # funding_rounds = fetch_enrichment_data("interview-test-funding.json.gz")
+    funding_rounds = json_file_to_data_frame("../real_data/funding_rounds.json")
 
     result = []
     for company in companies_data.itertuples():
@@ -82,7 +83,7 @@ def main():
                         help="Skip step where company data is enriched with information about their funding rounds")
     parser.add_argument("--use-html-scraper", action="store_true",
                         help="Use Playwright to scrape data from HTML instead of requesting JSON page data "
-                             "(slower, lower precision, made for demonstrative purposes)")
+                             "(slower, slightly lower fidelity, made for demonstrative purposes)")
     parser.add_argument("--single-process", action="store_true",
                         help="Longer execution time, less stress on CPU and easier to debug")
 
@@ -94,19 +95,19 @@ def main():
         company_data = get_company_data_from_page_data(args)
     company_data_df = pandas.DataFrame.from_dict(company_data)
 
-    all_organizations = fetch_enrichment_data("interview-test-org.json.gz")
-    # all_organizations = json_file_to_data_frame("../real_data/organizations.json")
+    # all_organizations = fetch_enrichment_data("interview-test-org.json.gz")
+    all_organizations = json_file_to_data_frame("../real_data/organizations.json")
 
     start = time.perf_counter()
     all_organizations.dropna(subset=['homepage_url'], inplace=True)
-    all_organizations['registeredDomain'] = all_organizations['homepage_url'].apply(get_registered_domain)
-    all_organizations.drop_duplicates(subset=["name", "registeredDomain"], keep="last", inplace=True)
-    print(f"Adding registeredDomain and cleaning dataframe took {time.perf_counter() - start:.6f} seconds to execute")
+    all_organizations['registered_domain'] = all_organizations['homepage_url'].apply(get_registered_domain)
+    all_organizations.drop_duplicates(subset=["name", "registered_domain"], keep="last", inplace=True)
+    print(f"Adding registered_domain and cleaning dataframe took {time.perf_counter() - start:.6f} seconds to execute")
 
     print(f"{len(company_data_df.index)} rows before merge")
     start = time.perf_counter()
     enriched_company_data = pandas.merge(company_data_df, all_organizations, how="left",
-                                         left_on=["registeredDomain", "title"], right_on=["registeredDomain", "name"])
+                                         left_on=["registered_domain", "title"], right_on=["registered_domain", "name"])
     end = time.perf_counter()
     elapsed = end - start
     print(f"Merging DataFrames took {elapsed:.6f} seconds to execute")
@@ -116,7 +117,7 @@ def main():
         funding_rounds = get_funding_rounds(enriched_company_data)
         enriched_company_data = enriched_company_data.assign(funding_rounds=funding_rounds)
 
-    with open("../results/result.json", "w", encoding="utf-8") as file:
+    with open("../results/result3.json", "w", encoding="utf-8") as file:
         enriched_company_data.to_json(path_or_buf=file, orient="records", indent=4, force_ascii=False)
 
 
