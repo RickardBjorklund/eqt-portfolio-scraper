@@ -16,6 +16,7 @@ In order to run the code with the `--use-html-scraper` argument, you need to let
 # Basic usage
 To run the code in its most basic form: `python src/main.py`.
 To see all options available when running code: `python src/main.py --help`.
+To run unittests: `python -m unittest tests/test_page_data.py`
 
 ## Resulting data
 The code will produce a JSON file named `result_{current_time}.json` and place it in the `/results` folder.

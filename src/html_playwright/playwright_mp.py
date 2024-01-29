@@ -1,9 +1,6 @@
 import multiprocessing as mp
-from unittest import TestCase
 
 from playwright.sync_api import sync_playwright
-
-from src.utils import write_json_file
 
 
 def scrape_sub_page(company):
@@ -120,16 +117,3 @@ def scrape_website(url):
         company |= company_details[index]
 
     return companies
-
-
-class TestScraping(TestCase):
-
-    def test_scraping(self):
-        data = scrape_website("https://eqtgroup.com/current-portfolio/")
-        print("Success", len(data))
-        write_json_file("../../results/current_portfolio_scraped_with_playwright_mp.json", data)
-
-    def test_subpage_scraping(self):
-        data = scrape_sub_page({"company_details_path": "/current-portfolio/3shape/"})
-        print("Success", len(data))
-        write_json_file("../../results/3shape_scraped_with_playwright_mp.json", data)

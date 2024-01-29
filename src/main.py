@@ -64,6 +64,7 @@ def get_company_data_from_page_data_async(portfolio_type):
 @time_function
 def get_funding_rounds(companies_data):
     funding_rounds = fetch_enrichment_data("interview-test-funding.json.gz")
+    print(f"{len(funding_rounds.index)} funding round entries were loaded from CGS")
 
     result = []
     for company in companies_data.itertuples():
@@ -109,25 +110,25 @@ def main():
             company_data = get_company_data_from_page_data(args.type)
         else:
             company_data = get_company_data_from_page_data_async(args.type)
-
+    print(f"{len(company_data)} companies were found by scraping website")
     company_data_df = pandas.DataFrame.from_dict(company_data)
 
     all_organizations = fetch_enrichment_data("interview-test-org.json.gz")
+    print(f"{len(all_organizations.index)} organization entries were loaded from CGS")
 
     start = time.perf_counter()
     all_organizations.dropna(subset=['homepage_url'], inplace=True)
     all_organizations['registered_domain'] = all_organizations['homepage_url'].apply(get_registered_domain)
     all_organizations.drop_duplicates(subset=["name", "registered_domain"], keep="last", inplace=True)
     print(f"Adding registered_domain and cleaning dataframe took {time.perf_counter() - start:.6f} seconds to execute")
+    print(f"{len(all_organizations.index)} organization entries remain after cleaning")
 
-    print(f"{len(company_data_df.index)} rows before merge")
+    print(f"{len(company_data_df.index)} rows of company data before merge")
     start = time.perf_counter()
     enriched_company_data = pandas.merge(company_data_df, all_organizations, how="left",
                                          left_on=["registered_domain", "title"], right_on=["registered_domain", "name"])
-    end = time.perf_counter()
-    elapsed = end - start
-    print(f"Merging DataFrames took {elapsed:.6f} seconds to execute")
-    print(f"{len(enriched_company_data.index)} rows after merge")
+    print(f"Merging DataFrames took {time.perf_counter() - start:.6f} seconds to execute")
+    print(f"{len(enriched_company_data.index)} rows of company data after merge")
 
     if not args.skip_funding_rounds:
         funding_rounds = get_funding_rounds(enriched_company_data)
