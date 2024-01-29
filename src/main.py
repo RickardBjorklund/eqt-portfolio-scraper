@@ -18,10 +18,8 @@ def get_company_data_from_html(args):
 
     company_data = []
     if "current" in args.type:
-        print("current html")
         company_data += scrape_website("https://eqtgroup.com/current-portfolio/")
     if "divested" in args.type:
-        print("divested html")
         company_data += scrape_website("https://eqtgroup.com/current-portfolio/divestments/")
 
     for company in company_data:
