@@ -23,7 +23,7 @@ def scrape_sub_page(browser, url):
     for item in tabular_information:
         parts = item.query_selector_all("div.flex-1")
         if len(parts) > 1:
-            key = parts[0].text_content().lower().replace(" ", "_")
+            key = parts[0].text_content().strip().lower().replace(" ", "_")
             value = parts[1].text_content()
             if key in result:
                 existing_value = result[key]
